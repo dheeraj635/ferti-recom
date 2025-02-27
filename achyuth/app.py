@@ -13,13 +13,28 @@ import pickle
 
 def load_models():
     """Load the trained models and encoders."""
-    with open('classifier.pkl', 'rb') as classifier_file:
+    with open('classifier.pkimport os
+import pickle
+
+def load_models():
+    """Load the trained models and encoders with file existence checks."""
+    classifier_path = 'classifier.pkl'
+    encoder_path = 'fertilizer.pkl'
+
+    if not os.path.exists(classifier_path):
+        raise FileNotFoundError(f"Model file '{classifier_path}' not found. Please upload it to the repository.")
+
+    if not os.path.exists(encoder_path):
+        raise FileNotFoundError(f"Encoder file '{encoder_path}' not found. Please upload it to the repository.")
+
+    with open(classifier_path, 'rb') as classifier_file:
         classifier = pickle.load(classifier_file)
     
-    with open('fertilizer.pkl', 'rb') as encoder_file:
+    with open(encoder_path, 'rb') as encoder_file:
         encoder = pickle.load(encoder_file)
     
     return classifier, encoder
+
 
 
 
